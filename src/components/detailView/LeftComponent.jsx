@@ -146,7 +146,7 @@ const LeftComponent = ({ product,handleIndex }) => {
                     </ColumnText>
                     <TableRow>
                         <TableCell colSpan={2}>
-                            <img src={adURL} style={{ width: 390 }} />
+                            <img src={adURL} style={{ width: 390 }} alt=''/>
                         </TableCell>
                     </TableRow>
                     <ColumnText>

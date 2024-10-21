@@ -18,7 +18,7 @@ const BoxContainer = styled(Box)`
 const Home = () => {
   const listProducts = useSelector((state) => state.getProducts);
 
-  const { products, error } = listProducts;
+  const { products} = listProducts;
 
   const dispatch = useDispatch();
 

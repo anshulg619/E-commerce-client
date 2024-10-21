@@ -34,7 +34,6 @@ const ProductForm = () => {
   const dispatch = useDispatch();
 
   const [color, setColor] = useState({ title: "", detailUrl: [""] });
-  const [colorList, setColorList] = useState([]);
 
   const [product, setProduct] = useState({
     product_id: "",
@@ -114,10 +113,10 @@ const ProductForm = () => {
     // Reset color state for new entry
     setColor({ title: "", detailUrl: [""] });
   };
-  const handleSubmit = (e) => {
-    
-    e.preventDefault();
 
+
+  const handleSubmit = (e) => {    
+    e.preventDefault();
 
     console.log(product);
 

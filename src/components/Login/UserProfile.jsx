@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import{Link, useLocation} from 'react-router-dom';
+import{Link} from 'react-router-dom';
 import { KeyboardArrowRight, Email, PermIdentity } from '@mui/icons-material';
 
 const Image = styled('img')({

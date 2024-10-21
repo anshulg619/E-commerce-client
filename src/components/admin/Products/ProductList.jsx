@@ -32,7 +32,7 @@ const ProductList = () => {
     const {products} = useSelector(state => state.getProducts)
     useEffect(() => {
         dispatch(getProducts())
-    },[])
+    },[dispatch])
   return (
 
     <>

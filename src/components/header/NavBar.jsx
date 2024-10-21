@@ -89,7 +89,7 @@ const NavBar = () => {
                   fontWeight: "600px",
                 }}
               >
-                <Link to={admin&&Object.keys(admin).length>0?'/admin/dashboard':'/admin'} style={LinkStyle}>
+                <Link to={admin&&Object.keys(admin).length>0 ?'/admin/dashboard':'/admin'} style={LinkStyle}>
                   Admin DashBoard
                 </Link>
               </Typography>

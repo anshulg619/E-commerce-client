@@ -73,7 +73,7 @@ const AdminHome = () => {
         //handleClose();
         setError(false);
         navigate('/admin/dashboard')
-        setAccount(admin.user.username);
+        //setAccount(admin.user.username);
         
         setLoginData({
           username: "",
@@ -81,6 +81,7 @@ const AdminHome = () => {
         });
         
       } catch (error) {
+        setError(true);
         console.log(error.message);
       }
     };

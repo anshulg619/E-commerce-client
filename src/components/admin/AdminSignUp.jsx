@@ -1,6 +1,5 @@
 import { Typography,Box, TextField, Button,styled, Input } from "@mui/material";
-import React, { useState, useContext } from "react";
-import { LoginContext } from "../../context/ContextProvider";
+import React, { useState,} from "react";
 import UserServices from "../../services/UserServices";
 import {useNavigate} from 'react-router-dom';
 
@@ -36,7 +35,6 @@ const SignUpForm = styled(Box)`
 const AdminSignUp = () => {
 
     const [error, setError] = useState(false);
-    const {setAccount} = useContext(LoginContext);
     const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -86,7 +84,7 @@ const AdminSignUp = () => {
         .then((res) => {
           console.log(res.data);
           navigate('/admin');
-          alert("Please Login with registered username")
+          alert("Please Login to continue")
         })
         .catch((error) => {
           console.log("error:" + error.message);

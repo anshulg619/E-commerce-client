@@ -44,7 +44,7 @@ const TotalView = ({cartItems}) => {
 
     useEffect(() => {
         totalAmount();
-    },[cartItems])
+    })
 
     const totalAmount = () => {
         let price=0 ; let discount = 0 ;

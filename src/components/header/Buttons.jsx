@@ -74,7 +74,6 @@ const Buttons = () => {
 
   const {user} = useSelector(state => state.user)
 
-  const {admin} = useSelector(state => state.admin)
 
   useEffect(() => {
     if(user&&Object.keys(user).length>0){
@@ -83,7 +82,7 @@ const Buttons = () => {
       dispatch(userCartAction(id,user.token))
     }
 
-  },[user])
+  },[user,dispatch])
 
   const handleClick = () => {
     setOpen(true);

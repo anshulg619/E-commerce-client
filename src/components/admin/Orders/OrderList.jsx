@@ -33,7 +33,7 @@ const OrderList = () => {
     const {admin} = useSelector(state => state.admin)
     useEffect(() => {
         dispatch(getOrdersAction(admin.token))
-    },[])
+    },[dispatchEvent])
   return (
 
     <>
