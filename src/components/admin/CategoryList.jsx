@@ -38,8 +38,16 @@ const CategoryList = () => {
 
 
     useEffect(() => {
-        dispatch(getAllCategoriesAction(token))
-    },[dispatch])
+        fetchCategory();
+    })
+
+    const fetchCategory = () => {
+    try{
+        dispatch(getAllCategoriesAction(token));
+    }catch(error){
+      console.log(error.message);
+    }
+    }
 
     const handleChange = (e) => {
         const {name, value}  = e.target
@@ -59,6 +67,7 @@ const CategoryList = () => {
                 name:'',
                 parentId:''
             })
+            fetchCategory();
         }).catch((error) => {
             console.log(error.message);
         })
@@ -68,6 +77,7 @@ const CategoryList = () => {
         UserServices.deleteCategory(id,token)
         .then((response) => {
             console.log(response.data)
+            fetchCategory();
         }).catch((error) => {
             console.log(error.message);
         })
