@@ -115,8 +115,59 @@ const ProductForm = () => {
   };
 
 
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // Validate Product ID
+    if (!product.product_id) newErrors.product_id = "Product ID is required.";
+  
+    // Validate Short Title
+    if (!product.title.shortTitle) newErrors.shortTitle = "Short Title is required.";
+  
+    // Validate Long Title
+    if (!product.title.longTitle) newErrors.longTitle = "Long Title is required.";
+  
+    // Validate URL
+    if (!product.url) newErrors.url = "Image URL is required.";
+    
+    // Validate Price
+    if (!product.price.mrp || product.price.mrp <= 0) {
+      newErrors.mrp = "MRP must be a positive number.";
+    }
+    
+    if (!product.price.cost || product.price.cost <= 0) {
+      newErrors.cost = "Cost must be a positive number.";
+    }
+    
+    if (product.price.discount && (isNaN(product.price.discount) || product.price.discount < 0)) {
+      newErrors.discount = "Discount must be a non-negative number.";
+    }
+  
+    // Validate Units Available
+    if (!product.units || product.units <= 0) {
+      newErrors.units = "Units Available must be a positive number.";
+    }
+  
+    // Validate Description
+    if (!product.description) newErrors.description = "Description is required.";
+  
+    // Validate Category
+    if (!product.category) newErrors.category = "Category is required.";
+  
+    return newErrors;
+  };
+
+
   const handleSubmit = (e) => {    
     e.preventDefault();
+
+    const validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+    }else{
 
     console.log(product);
 
@@ -131,6 +182,7 @@ const ProductForm = () => {
       .catch((error) => {
         console.log(error.message);
       });
+    }
   };
 
   return (
