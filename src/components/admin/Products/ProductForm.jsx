@@ -55,7 +55,7 @@ const ProductForm = () => {
 
   useEffect(() => {
     dispatch(getAllCategoriesAction(admin.token));
-  },[dispatch]);
+  },[]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
