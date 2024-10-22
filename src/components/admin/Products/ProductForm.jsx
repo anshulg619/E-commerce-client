@@ -303,8 +303,8 @@ const ProductForm = () => {
           label="MRP"
           name="mrp"
           value={product.price.mrp}
-          error={!!error.price.mrp}
-          helperText={error.price.mrp}
+          error={!!error.mrp}
+          helperText={error.mrp}
           onChange={handlePriceChange}
         />
 
@@ -314,8 +314,8 @@ const ProductForm = () => {
           label="Cost"
           name="cost"
           value={product.price.cost}
-          error={!!error.price.cost}
-          helperText={error.price.cost}
+          error={!!error.cost}
+          helperText={error.cost}
           onChange={handlePriceChange}
         />
 
@@ -325,8 +325,8 @@ const ProductForm = () => {
           label="Discount(%)"
           name="discount"
           value={product.price.discount}
-          error={!!error.price.discount}
-          helperText={error.price.discount}
+          error={!!error.discount}
+          helperText={error.discount}
           onChange={handlePriceChange}
         />
       </Box>
@@ -338,7 +338,7 @@ const ProductForm = () => {
         name="units"
         value={product.units}
         error={!!error.units}
-        helperText={error.price.units}
+        helperText={error.units}
         onChange={handleChange}
       />
 
