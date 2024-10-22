@@ -39,7 +39,7 @@ const CategoryList = () => {
 
     useEffect(() => {
         fetchCategory();
-    })
+    },[])
 
     const fetchCategory = () => {
     try{

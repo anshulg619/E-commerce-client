@@ -224,7 +224,7 @@ const AdminSignUp = () => {
             helperText={error.confirm}
             onChange={handleChange}
           />
-          <Input type="file" name="profilePhoto" onChange={handleFileChange} />
+          <Input type="file" name="profilePhoto" onChange={handleFileChange} required/>
           <Button
             onClick={handleSubmit}
             variant="contained"
