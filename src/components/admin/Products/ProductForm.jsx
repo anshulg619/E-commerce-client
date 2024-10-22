@@ -33,6 +33,8 @@ const ProductForm = () => {
 
   const dispatch = useDispatch();
 
+  const [error,setError] = useState({});
+
   const [color, setColor] = useState({ title: "", detailUrl: [""] });
 
   const [product, setProduct] = useState({
@@ -165,7 +167,7 @@ const ProductForm = () => {
     const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
+        setError(validationErrors);
         return;
     }else{
 
@@ -194,6 +196,8 @@ const ProductForm = () => {
         type="text"
         name="product_id"
         value={product.product_id}
+        error={!!error.product_id}
+        helperText={error.product_id}
         onChange={handleChange}
       />
       <h3>Title</h3>
@@ -203,6 +207,8 @@ const ProductForm = () => {
         type="text"
         name="shortTitle"
         value={product.title.shortTitle}
+        error={!!error.shortTitle}
+        helperText={error.shortTitle}
         onChange={handleTitleChange}
       />
       <StyledTextField
@@ -211,6 +217,8 @@ const ProductForm = () => {
         type="text"
         name="longTitle"
         value={product.title.longTitle}
+        error={!!error.longTitle}
+        helperText={error.longTitle}
         onChange={handleTitleChange}
       />
       <h3>Image</h3>
@@ -220,6 +228,8 @@ const ProductForm = () => {
         type="text"
         name="url"
         value={product.url}
+        error={!!error.url}
+        helperText={error.url}
         onChange={handleChange}
       />
       <h3>Colors</h3>
@@ -293,6 +303,8 @@ const ProductForm = () => {
           label="MRP"
           name="mrp"
           value={product.price.mrp}
+          error={!!error.price.mrp}
+          helperText={error.price.mrp}
           onChange={handlePriceChange}
         />
 
@@ -302,6 +314,8 @@ const ProductForm = () => {
           label="Cost"
           name="cost"
           value={product.price.cost}
+          error={!!error.price.cost}
+          helperText={error.price.cost}
           onChange={handlePriceChange}
         />
 
@@ -311,6 +325,8 @@ const ProductForm = () => {
           label="Discount(%)"
           name="discount"
           value={product.price.discount}
+          error={!!error.price.discount}
+          helperText={error.price.discount}
           onChange={handlePriceChange}
         />
       </Box>
@@ -321,6 +337,8 @@ const ProductForm = () => {
         type="number"
         name="units"
         value={product.units}
+        error={!!error.units}
+        helperText={error.price.units}
         onChange={handleChange}
       />
 
@@ -329,6 +347,8 @@ const ProductForm = () => {
         label="Description"
         name="description"
         value={product.description}
+        error={!!error.description}
+        helperText={error.description}
         onChange={handleChange}
       />
 
@@ -349,6 +369,8 @@ const ProductForm = () => {
           name="category"
           value={product.category}
           onChange={handleChange}
+          error={!!error.category}
+          helperText={error.category}
           label="Category"
         >
           {categories.map((item) => (
