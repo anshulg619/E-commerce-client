@@ -1,22 +1,31 @@
-import { Typography,Box, TextField, Button,styled, Input } from "@mui/material";
-import React, { useState,} from "react";
+import {
+  Typography,
+  Box,
+  TextField,
+  Button,
+  styled,
+  Input,
+} from "@mui/material";
+import React, { useState } from "react";
 import UserServices from "../../services/UserServices";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Image = styled(Box)`
-background: brown url('https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/login_img_c4a81e.png') center 85% no-repeat ;
-paddding:45px 35px;
-display:flex;
-flex-direction:column;
-width:35%;
+  background: brown
+    url("https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/login_img_c4a81e.png")
+    center 85% no-repeat;
+  paddding: 45px 35px;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
 `;
 
 const Wrapper = styled(Box)`
   margin: 80px 180px;
   padding-right: 24px;
   display: flex;
-  background:#fff;
-  height:90vh;
+  background: #fff;
+  height: 90vh;
 `;
 
 const SignUpForm = styled(Box)`
@@ -24,18 +33,13 @@ const SignUpForm = styled(Box)`
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
-  width:60%;
-  text-align:center;
+  width: 60%;
+  text-align: center;
 `;
 
-
-
-
-
 const AdminSignUp = () => {
-
-    const [error, setError] = useState({});
-    const navigate = useNavigate();
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -45,7 +49,7 @@ const AdminSignUp = () => {
     phoneNumber: "",
     password: "",
     confirm: "",
-    profilePhoto:null
+    profilePhoto: null,
   });
 
   const handleChange = (e) => {
@@ -60,16 +64,16 @@ const AdminSignUp = () => {
   const handleFileChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      profilePhoto: e.target.files[0]
+      profilePhoto: e.target.files[0],
     }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.firstName) newErrors.firstName = "First Name is required.";
     if (!formData.lastName) newErrors.lastName = "Last Name is required.";
-    
+
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email) {
@@ -77,48 +81,46 @@ const AdminSignUp = () => {
     } else if (!emailRegex.test(formData.email)) {
       newErrors.email = "Invalid email format.";
     }
-    
+
     if (!formData.username) newErrors.username = "Username is required.";
-    
+
     // Phone number validation (example: must be numeric)
     if (!formData.phoneNumber || isNaN(formData.phoneNumber)) {
       newErrors.phoneNumber = "Valid phone number is required.";
     }
-    
+
     if (!formData.password) {
       newErrors.password = "Password is required.";
     }
-    
+
     if (formData.password !== formData.confirm) {
       newErrors.confirm = "Passwords do not match.";
     }
-  
+
     return newErrors;
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const validationErrors = validateForm();
-  
-  if (Object.keys(validationErrors).length > 0) {
-    setError(validationErrors);
-    return;
-  }
 
-    const formBody = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      username: formData.username,
-      phoneNumber: formData.phoneNumber,
-      password: formData.password,
-      profilePhoto:formData.profilePhoto
-    };
-    console.log(formBody);
+    if (Object.keys(validationErrors).length > 0) {
+      setError(validationErrors);
+      return;
+    } else {
+      const formBody = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        username: formData.username,
+        phoneNumber: formData.phoneNumber,
+        password: formData.password,
+        profilePhoto: formData.profilePhoto,
+      };
+      console.log(formBody);
 
-    /*if (formData.confirm === formData.password) {
+      /*if (formData.confirm === formData.password) {
       setError(false);
       UserServices.addNewAdmin(formBody)
         .then((res) => {
@@ -133,25 +135,27 @@ const AdminSignUp = () => {
       setError(true);
     }*/
 
-
-    UserServices.addNewAdmin(formBody)
+      UserServices.addNewAdmin(formBody)
         .then((res) => {
           console.log(res.data);
-          navigate('/admin');
-          alert("Please Login to continue")
+          navigate("/admin");
+          alert("Please Login to continue");
         })
         .catch((error) => {
           console.log("error:" + error.message);
         });
+    }
   };
 
   return (
     <>
       <Wrapper>
         <Image>
-          <Typography style={{ color: "white", padding: 20,}}>Lookslike you're new here</Typography>
+          <Typography style={{ color: "white", padding: 20 }}>
+            Lookslike you're new here
+          </Typography>
           <Typography style={{ color: "#f2f2f2", padding: 20, fontSize: 14 }}>
-          Sign Up to access the web application admin privileges
+            Sign Up to access the web application admin privileges
           </Typography>
         </Image>
 
@@ -201,7 +205,7 @@ const AdminSignUp = () => {
             helperText={error.phoneNumber}
             onChange={handleChange}
           />
-          
+
           <TextField
             variant="outlined"
             name="password"
@@ -220,7 +224,7 @@ const AdminSignUp = () => {
             helperText={error.confirm}
             onChange={handleChange}
           />
-          <Input type="file"  name='profilePhoto' onChange={handleFileChange} />
+          <Input type="file" name="profilePhoto" onChange={handleFileChange} />
           <Button
             onClick={handleSubmit}
             variant="contained"
