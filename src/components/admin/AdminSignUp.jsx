@@ -184,7 +184,7 @@ const AdminSignUp = () => {
             value={formData.email}
             label="Email"
             error={!!error.email}
-            helperText={error.email}
+            helperText={error.email|| "Enter a valid email address"}
             onChange={handleChange}
           />
           <TextField
