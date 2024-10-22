@@ -34,7 +34,7 @@ const SignUpForm = styled(Box)`
 
 const AdminSignUp = () => {
 
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({});
     const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -64,8 +64,48 @@ const AdminSignUp = () => {
     }));
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!formData.firstName) newErrors.firstName = "First Name is required.";
+    if (!formData.lastName) newErrors.lastName = "Last Name is required.";
+    
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) {
+      newErrors.email = "Email is required.";
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Invalid email format.";
+    }
+    
+    if (!formData.username) newErrors.username = "Username is required.";
+    
+    // Phone number validation (example: must be numeric)
+    if (!formData.phoneNumber || isNaN(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Valid phone number is required.";
+    }
+    
+    if (!formData.password) {
+      newErrors.password = "Password is required.";
+    }
+    
+    if (formData.password !== formData.confirm) {
+      newErrors.confirm = "Passwords do not match.";
+    }
+  
+    return newErrors;
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const validationErrors = validateForm();
+  
+  if (Object.keys(validationErrors).length > 0) {
+    setError(validationErrors);
+    return;
+  }
 
     const formBody = {
       firstName: formData.firstName,
@@ -78,7 +118,7 @@ const AdminSignUp = () => {
     };
     console.log(formBody);
 
-    if (formData.confirm === formData.password) {
+    /*if (formData.confirm === formData.password) {
       setError(false);
       UserServices.addNewAdmin(formBody)
         .then((res) => {
@@ -91,7 +131,18 @@ const AdminSignUp = () => {
         });
     } else {
       setError(true);
-    }
+    }*/
+
+
+    UserServices.addNewAdmin(formBody)
+        .then((res) => {
+          console.log(res.data);
+          navigate('/admin');
+          alert("Please Login to continue")
+        })
+        .catch((error) => {
+          console.log("error:" + error.message);
+        });
   };
 
   return (
@@ -110,6 +161,8 @@ const AdminSignUp = () => {
             name="firstName"
             value={formData.firstName}
             label="FirstName"
+            error={!!error.firstName}
+            helperText={error.firstName}
             onChange={handleChange}
           />
           <TextField
@@ -117,6 +170,8 @@ const AdminSignUp = () => {
             name="lastName"
             value={formData.lastName}
             label="LastName"
+            error={!!error.lastName}
+            helperText={error.lastName}
             onChange={handleChange}
           />
           <TextField
@@ -124,6 +179,8 @@ const AdminSignUp = () => {
             name="email"
             value={formData.email}
             label="Email"
+            error={!!error.email}
+            helperText={error.email}
             onChange={handleChange}
           />
           <TextField
@@ -131,6 +188,8 @@ const AdminSignUp = () => {
             name="username"
             value={formData.username}
             label="Username"
+            error={!!error.username}
+            helperText={error.username}
             onChange={handleChange}
           />
           <TextField
@@ -138,20 +197,18 @@ const AdminSignUp = () => {
             name="phoneNumber"
             value={formData.phoneNumber}
             label="Phone Number"
+            error={!!error.phoneNumber}
+            helperText={error.phoneNumber}
             onChange={handleChange}
           />
-          {error && (
-            <Typography
-              style={{ color: "#ff6161", lineHeight: 0, fontSize: 10 }}
-            >
-              Password doesn't match
-            </Typography>
-          )}
+          
           <TextField
             variant="outlined"
             name="password"
             value={formData.password}
             label="Enter Password"
+            error={!!error.password}
+            helperText={error.password}
             onChange={handleChange}
           />
           <TextField
@@ -159,6 +216,8 @@ const AdminSignUp = () => {
             name="confirm"
             value={formData.confirm}
             label="Confirm Password"
+            error={!!error.confirm}
+            helperText={error.confirm}
             onChange={handleChange}
           />
           <Input type="file"  name='profilePhoto' onChange={handleFileChange} />
