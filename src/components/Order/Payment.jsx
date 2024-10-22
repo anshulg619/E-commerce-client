@@ -64,6 +64,7 @@ const Payment = ({total, setPayMethod, click}) => {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="credit_card"
             name="paymentMethod"
+            required
             onChange={handleChange}
           >
             <FormControlLabel value="credit_card" control={<Radio />} label="Credit Card" />
