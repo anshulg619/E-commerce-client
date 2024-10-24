@@ -24,6 +24,7 @@ import { Box } from "@mui/material";
 import UserProfile from "./components/Login/UserProfile";
 import OrderList from "./components/admin/Orders/OrderList";
 import CategoryList from "./components/admin/CategoryList";
+import ProductView from "./components/admin/Products/ProductView";
 
 
 
@@ -51,6 +52,7 @@ function App() {
                   <Route path = "/admin/profile" element = {<AdminProfile />} />
                   <Route path="/admin/orderList" element = {<OrderList/>} />
                   <Route path="/admin/categoryList" element = {<CategoryList/>} />
+                  <Route path="/admin/productView/:id" element = {<ProductView/>} />
               </Routes>
           </Box>
           <Footer />

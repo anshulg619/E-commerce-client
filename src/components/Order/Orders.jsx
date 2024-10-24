@@ -43,20 +43,71 @@ const Orders = () => {
   })
 
   const [products,setProducts] = useState([]) 
-
   
+  const [error, setError] = useState({})
 
   const [total, setTotal] = useState(0);
 
   const [payMethod,setPayMethod] = useState('');
 
+  const validate = () => {
+    const newErrors = {};
+    
+    // Name validation
+    if (!address.name) {
+      newErrors.name = 'Name is required';
+    }
+
+    // Phone validation
+    if (!address.phone) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\d{10}$/.test(address.phone)) {
+      newErrors.phone = 'Phone number must be 10 digits';
+    }
+
+    // Address Line 1 validation
+    if (!address.line1) {
+      newErrors.line1 = 'Address Line 1 is required';
+    }
+
+    // City validation
+    if (!address.city) {
+      newErrors.city = 'City is required';
+    }
+
+    // ZIP Code validation
+    if (!address.zipCode) {
+      newErrors.zipCode = 'ZIP Code is required';
+    } else if (!/^\d{5}$/.test(address.zipCode)) {
+      newErrors.zipCode = 'ZIP Code must be 5 digits';
+    }
+
+    // State validation
+    if (!address.state) {
+      newErrors.state = 'State is required';
+    }
+
+    // Country validation
+    if (!address.country) {
+      newErrors.country = 'Country is required';
+    }
+
+    return newErrors;
+  };
+
   const Next = (prevStep) => {
   
     if(prevStep===0){
+    const validationErrors=validate();
+    if(Object.keys(validationErrors).length>0){
+      setError(validationErrors);
+    }else{
     setActiveStep(prevStep+1)
+    }
     }else{
       setActiveStep(prevStep+1)
     }
+    
   }
 
   const back = (prevStep) => {
@@ -92,7 +143,7 @@ const Orders = () => {
   const stepSwitch = (step) => {
     switch (step) {
       case 0:
-       return <Info address={address} setAddress={setAddress}/>
+       return <Info address={address} setAddress={setAddress} error = {error}/>
       case 1:
       return <OrderDetails address={address} products={products} setProducts={setProducts} setTotal={setTotal}/>
       case 2:
