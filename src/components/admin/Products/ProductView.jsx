@@ -12,7 +12,7 @@ const ProductView = () => {
 
   useEffect(() => {
     if (product && id !== product._id) dispatch(getProductDetail(id));
-  }, [dispatch, id, loading, product]);
+  }, [dispatch, id, product]);
 
   return (
     <Box style={{display:'flex'}}>
