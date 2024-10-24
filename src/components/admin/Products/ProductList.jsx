@@ -68,7 +68,7 @@ const ProductList = () => {
             <TableCell align="right">{item.price.mrp}</TableCell>
             <TableCell align="right">{item.price.cost}</TableCell>
             <TableCell align="right">{item.category}</TableCell>
-            <TableCell><Link to={`/admin/productView/${products._id}`} style={LinkStyle}><Button>View</Button></Link></TableCell>
+            <TableCell><Link to={`/admin/productView/${item._id}`} style={LinkStyle}><Button>View</Button></Link></TableCell>
           </TableRow>
         ))}
       </TableBody>
